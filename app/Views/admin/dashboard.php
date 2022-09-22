@@ -1,7 +1,5 @@
 <?= $this->extend('template'); ?>
 <?= $this->section('content'); ?>
-<link rel="stylesheet" href="/css/admin.css">
-
 
 <div class="d-flex">
 
