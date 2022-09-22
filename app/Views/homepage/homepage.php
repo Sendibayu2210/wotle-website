@@ -179,7 +179,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 d-lg-flex d-md-none d-sm-none bg-first-page">
+            <div class="col-lg-6 d-lg-flex d-md-none d-sm-none d-xs-none bg-first-page">
                 <div class="card-img-small mx-3 my-auto">
                     <img src="https://previews.123rf.com/images/rido/rido1010/rido101000565/8235680-business-discussion-at-working-meeting-in-office-vertical-copy-space.jpg" alt="">
                 </div>

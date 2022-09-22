@@ -165,3 +165,9 @@ section#content-admin{
     height: 100%;
     border-radius: 50%;
   }
+
+  @media only screen and (max-width:520px) {
+    .d-xs-none{
+        display: none;
+    }
+  }
