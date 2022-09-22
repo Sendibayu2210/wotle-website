@@ -15,7 +15,7 @@
             font-family: 'Poppins', sans-serif;
         }
     </style>
-    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 
 <body>
