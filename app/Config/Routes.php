@@ -39,6 +39,7 @@ $routes->get('/', 'Home::index');
 
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
+$routes->get('/admin', 'Admin::index');
 
 /*
  * --------------------------------------------------------------------
