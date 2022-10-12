@@ -40,6 +40,9 @@ $routes->get('/', 'Home::index');
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
 $routes->get('/admin', 'Admin::index');
+$routes->get('/payment', "Admin::payment");
+$routes->get('/favorite', "Admin::favorite");
+$routes->get('/tiket', "Admin::tiket");
 
 /*
  * --------------------------------------------------------------------

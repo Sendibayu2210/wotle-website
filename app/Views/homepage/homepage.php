@@ -4,6 +4,7 @@
 <style>
     .page-first {
         height: 90vh;
+        margin-top: -10px;
     }
 
     .page-first .card-img-small {
@@ -145,7 +146,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Portofolio</a>
+                    <a class="nav-link active" aria-current="page" href="#portofolio">Portofolio</a>
                 </li>
             </ul>
             <div>
@@ -161,30 +162,30 @@
     <div class="container">
         <div class="row pt-5">
             <div class="col-lg-6 text-capitalize">
-                <div class="h1">We are creative digital & marketing agency</div>
-                <div class="mt-4 h5">
-                    we help to create clients desire task property & our team also colloboration with you
+                <div class="h1">Perjalanan Nyaman dan Menyenangkan</div>
+                <div class="mt-4 h5 small">
+                    Ingin berlibur ke kota Bandung dengan harga terjangkau? Pastikan Anda memilih paket Bandung Tour & Travel yang sedang memberikan diskon besar-besaran untuk berwisata di Lembang, Kota Bandung.
                 </div>
                 <div class="d-flex mt-5">
                     <div class="my-auto line-page-first"><i class="fa-regular fa-circle-play h1 text-primary me-4"></i></div>
-                    <button class="btn btn-primary shadow">Get started</button>
+                    <button class="btn btn-primary shadow">Get More</button>
                 </div>
 
                 <div class="pt-5 mt-4">
                     <div class="logo-mitra d-flex">
                         <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-google-sva-scholarship-20.png" alt="">
-                        <img src="https://www.freepnglogos.com/uploads/netflix-tv-logo-png-9.png" alt="">
+                        <img src="/img/gplay.png" alt="">
                         <img src="https://w7.pngwing.com/pngs/788/714/png-transparent-logo-facebook-social-media-business-restaurant-menu-books-blue-text-trademark.png" alt="">
-                        <img src="https://w7.pngwing.com/pngs/1012/770/png-transparent-amazon-logo-amazon-com-amazon-video-logo-company-brand-amazon-logo-miscellaneous-wish-text.png" alt="">
+                        <img src="/img/ig.png" alt="">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 d-lg-flex d-md-none d-sm-none d-xs-none bg-first-page">
                 <div class="card-img-small mx-3 my-auto">
-                    <img src="https://previews.123rf.com/images/rido/rido1010/rido101000565/8235680-business-discussion-at-working-meeting-in-office-vertical-copy-space.jpg" alt="">
+                    <img src="/img/wisata1.jpg" alt="">
                 </div>
                 <div class="card-img-large mx-3">
-                    <img src="https://previews.123rf.com/images/rido/rido1010/rido101000565/8235680-business-discussion-at-working-meeting-in-office-vertical-copy-space.jpg" alt="">
+                    <img src="/img/wisata2.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -194,19 +195,33 @@
 <!-- service -->
 <div class="service py-5 bg-light-gray">
     <div class="container">
-        <div class="text-primary h5 my-3">Service</div>
-        <div class="h3 fw-bold mb-4 title-service">What we do ? </div>
+        <div class="text-primary h5 my-3">Pelayanan</div>
+        <div class="h3 fw-bold mb-4 title-service">Apa yang kami lakukan ? </div>
         <div class="row">
-            <?php for ($i = 0; $i < 3; $i++) : ?>
-                <div class="col-lg-4 mb-5">
-                    <div class="service-icon bg-primary d-flex justify-content-center my-3">
-                        <div class="my-auto h4"><i class="fa-solid fa-rocket text-white"></i></div>
-                    </div>
-                    <div class="h4">Lorem</div>
-                    <div class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo aliquid suscipit nulla repellat modi eos mollitia provident corrupti, tenetur unde.</div>
-                    <div class="small"><a href="#" class="text-primary">Read more</a></div>
+            <div class="col-lg-4 mb-5">
+                <div class="service-icon bg-primary d-flex justify-content-center my-3">
+                    <div class="my-auto h4"><i class="fas fa-search text-white"></i></div>
                 </div>
-            <?php endfor; ?>
+                <div class="h4">Pencarian Mudah</div>
+                <div class="my-2">Mencari travel lebih mudah, sistem akan menampilkan daftar perjalanan ke destinasi tujuan.</div>
+                <div class="small"><a href="#" class="text-primary">selanjutnya</a></div>
+            </div>
+            <div class="col-lg-4 mb-5">
+                <div class="service-icon bg-primary d-flex justify-content-center my-3">
+                    <div class="my-auto h4"><i class="fas fa-users text-white"></i></div>
+                </div>
+                <div class="h4">Mitra Terpercaya</div>
+                <div class="my-2">bekerjasama dengan mitra yang terpercaya, sehingga membuat pelanggan merasa aman dan tenang saat diperjalanan.</div>
+                <div class="small"><a href="#" class="text-primary">selanjutnya</a></div>
+            </div>
+            <div class="col-lg-4 mb-5">
+                <div class="service-icon bg-primary d-flex justify-content-center my-3">
+                    <div class="my-auto h4"><i class="fas fa-car text-white"></i></div>
+                </div>
+                <div class="h4">Tracking Perjalanan Secara Realtime</div>
+                <div class="my-2">Pelanggan dapat melihat alur perjalanan secara realtime</div>
+                <div class="small"><a href="#" class="text-primary">selanjutnya</a></div>
+            </div>
         </div>
     </div>
 </div>

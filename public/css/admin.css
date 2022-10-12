@@ -53,14 +53,16 @@ section#sidebar{
     position: absolute;
     bottom: 20px;        
 }
+.bg-content{
+    background: rgb(250, 248, 248);
+}
 
 
 
 /* Content */
 section#content-admin{
     width: calc(100% - 250px - 250px);    
-    padding: 25px 30px;
-    background: rgb(250, 248, 248);
+    padding: 25px 30px;    
     height: 100vh;
     overflow: auto;
 }

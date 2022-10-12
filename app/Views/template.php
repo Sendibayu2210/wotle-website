@@ -19,6 +19,7 @@
 </head>
 
 <body>
+
     <?= $this->renderSection('content'); ?>
 
     <script src="vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
