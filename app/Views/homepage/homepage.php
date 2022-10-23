@@ -1,4 +1,4 @@
-<?= $this->extend('template'); ?>
+<?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 
 <style>
@@ -94,7 +94,7 @@
         z-index: -2;
         top: 0;
         right: 0;
-        height: 100vh;
+        height: 120vh;
         width: 45%;
         background: #f6f6f8;
     }
@@ -139,14 +139,17 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-transparent pt-4">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Wotle</a>
+        <a class="navbar-brand fw-bold" href="/"><img src="/img/logo/logo_wotle.png" alt="" class="logo-wotle"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#portofolio">Portofolio</a>
+                    <a class="nav-link" aria-current="page" href="#Promo">Promo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#portofolio">Portofolio</a>
                 </li>
             </ul>
             <div>

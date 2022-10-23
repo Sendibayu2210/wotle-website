@@ -1,4 +1,4 @@
-<?= $this->extend('template'); ?>
+<?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 <div class="d-flex">
     <?= $this->include('sidebar-admin'); ?>

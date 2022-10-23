@@ -2,8 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\PromoModel;
+
 class Admin extends BaseController
 {
+    public function __construct()
+    {
+        $this->validation = \Config\Services::validation();
+        $this->PromoModel = new PromoModel();
+    }
+
     public function index()
     {
         $data = [
@@ -12,6 +20,215 @@ class Admin extends BaseController
         ];
         return view('admin/dashboard', $data);
     }
+
+    public function users()
+    {
+        $data = [
+            'title' => 'Daftar Users',
+            'link' => 'users',
+
+        ];
+        return view('admin/users', $data);
+    }
+
+
+
+    // ================== PROMO ===========
+    public function promo()
+    {
+
+        $data = [
+            'title' => 'Promo',
+            'link' => 'promo',
+            'promo' => $this->PromoModel->findAll(),
+        ];
+        return view('admin/promo', $data);
+    }
+    public function tambah_promo()
+    {
+        $data = [
+            'title' => 'Tambah Promo',
+            'link' => 'promo',
+            'validation' => $this->validation,
+        ];
+        return view('admin/promo-tambah', $data);
+    }
+    public function edit_promo($id)
+    {
+        $promo = $this->PromoModel->find($id);
+        if ($promo) {
+            $data = [
+                'title' => 'Edit Promo',
+                'link' => 'promo',
+                'validation' => $this->validation,
+                'promo' => $promo
+            ];
+            return view('admin/promo-edit', $data);
+        }
+    }
+    public function save_promo()
+    {
+        if (!$this->validate([
+            'judul' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Judul Tidak boleh kosong'
+                ]
+            ],
+            'kode_promo' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kode promo Tidak boleh kosong'
+                ]
+            ],
+            'deskripsi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'isi artikel Tidak boleh kosong'
+                ]
+            ],
+            'tgl_mulai' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'isi artikel Tidak boleh kosong'
+                ]
+            ],
+            'tgl_akhir' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'isi artikel Tidak boleh kosong'
+                ]
+            ],
+            'berkas' => [
+                'rules' => 'uploaded[berkas]|mime_in[berkas,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[berkas,2048]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
+                    'max_size' => 'Ukuran File Maksimal 2 MB'
+                ]
+
+            ]
+        ])) {
+            session()->setFlashdata('message', $this->validator->listErrors());
+            session()->setFlashdata('message1', 'Error');
+            return redirect()->back()->withInput();
+        }
+
+        $dataBerkas = $this->request->getFile('berkas');
+        $fileName = $dataBerkas->getRandomName();
+        $this->PromoModel->insert([
+            'judul' => htmlspecialchars($this->request->getVar('judul')),
+            'kode_promo' => htmlspecialchars($this->request->getVar('kode_promo')),
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'poster' => $fileName,
+            'tgl_mulai' => $this->request->getVar('tgl_mulai'),
+            'tgl_akhir' => $this->request->getVar('tgl_akhir'),
+            'status' => 'aktif',
+        ]);
+        $dataBerkas->move('img/promo/', $fileName);
+        session()->setFlashdata('message', 'Data Promo Berhasil di Upload');
+        return redirect('admin-promo');
+    }
+
+    public function update_promo($id)
+    {
+        if (!$this->validate([
+            'judul' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Judul Tidak boleh kosong'
+                ]
+            ],
+            'kode_promo' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Kode promo Tidak boleh kosong'
+                ]
+            ],
+            'deskripsi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'isi artikel Tidak boleh kosong'
+                ]
+            ],
+            'tgl_mulai' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'isi artikel Tidak boleh kosong'
+                ]
+            ],
+            'tgl_akhir' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'isi artikel Tidak boleh kosong'
+                ]
+            ],
+            'berkas' => [
+                'rules' => 'mime_in[berkas,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[berkas,2048]',
+                'errors' => [
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
+                    'max_size' => 'Ukuran File Maksimal 2 MB'
+                ]
+
+            ]
+        ])) {
+            session()->setFlashdata('message', $this->validator->listErrors());
+            session()->setFlashdata('message1', 'Error');
+            return redirect()->back()->withInput();
+        }
+
+        $dataBerkas = $this->request->getFile('berkas');
+        if ($dataBerkas->getError() == 4) {
+            $fileName = $this->request->getVar('file_lama');
+        } else {
+            $fileName = $dataBerkas->getRandomName();
+            $dataBerkas->move('img/promo/', $fileName);
+
+            $posterLama = 'img/promo/' . $this->request->getVar('file_lama');
+            if (file_exists($posterLama)) {
+                unlink($posterLama);
+            }
+        }
+        $data = [
+            'judul' => htmlspecialchars($this->request->getVar('judul')),
+            'kode_promo' => htmlspecialchars($this->request->getVar('kode_promo')),
+            'deskripsi' => $this->request->getVar('deskripsi'),
+            'poster' => $fileName,
+            'tgl_mulai' => $this->request->getVar('tgl_mulai'),
+            'tgl_akhir' => $this->request->getVar('tgl_akhir'),
+            'status' => 'aktif',
+        ];
+        $update = $this->PromoModel->update($id, $data);
+        if ($update) {
+            session()->setFlashdata('message', 'Data promo Berhasil di Upload');
+        } else {
+            session()->setFlashdata('message', 'Data promo Gagal di Upload');
+        }
+        return redirect('admin-promo');
+    }
+
+    public function hapus_promo()
+    {
+        $id = $this->request->getVar('id');
+        $promo = $this->PromoModel->find($id);
+        $poster = 'img/promo/' . $promo['poster'];
+        if (file_exists($poster)) {
+            unlink($poster);
+        }
+        $hapus = $this->PromoModel->delete($id);
+        if ($hapus) {
+            session()->setFlashdata('message', 'Data berhasil dihapus');
+        } else {
+            session()->setFlashdata('message', 'Data gagal dihapus');
+        }
+        return redirect()->to('/admin-promo');
+    }
+
+
+
+
+
+
     public function payment()
     {
         $data = [

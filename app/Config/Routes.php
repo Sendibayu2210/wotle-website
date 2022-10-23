@@ -39,6 +39,18 @@ $routes->get('/', 'Home::index');
 
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
+$routes->get('/users', 'Admin::users');
+
+
+$routes->get('/admin-promo', 'Admin::promo');
+$routes->get('/tambah-promo', 'Admin::tambah_promo');
+$routes->post('/save-promo', 'Admin::save_promo');
+$routes->delete('/hapus-promo', 'Admin::hapus_promo');
+$routes->get('/edit-promo/(:num)', 'Admin::edit_promo/$1');
+$routes->post('/update-promo/(:num)', 'Admin::update_promo/$1');
+
+
+
 $routes->get('/admin', 'Admin::index');
 $routes->get('/payment', "Admin::payment");
 $routes->get('/favorite', "Admin::favorite");

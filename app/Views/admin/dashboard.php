@@ -1,9 +1,9 @@
-<?= $this->extend('template'); ?>
+<?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
 
 
 <div class="d-flex">
-    <?= $this->include('sidebar-admin'); ?>
+    <?= $this->include('layout/sidebar-admin'); ?>
 
     <section id="content-admin" class="bg-content">
         <div class="d-flex justify-content-between">
