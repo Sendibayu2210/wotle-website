@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UsersModel;
 
 function formatRupiah($rupiah)
 {
@@ -21,4 +22,12 @@ function toast_message()
             </div>
         </div>';
     endif;
+}
+
+
+function cek_session()
+{
+    if (!session()->get('username')) {
+        return redirect('login');
+    }
 }

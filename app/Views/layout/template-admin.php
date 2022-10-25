@@ -39,6 +39,12 @@
                 imgPreview.src = e.target.result;
             }
         }
+
+        function imgError() {
+            $("img").bind("error", function() {
+                $(this).attr("src", "/img/skeleton.gif");
+            });
+        }
     </script>
     <script src="/custom_vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
     <script src="/custom_vendor/fontawesome612/js/all.min.js"></script>

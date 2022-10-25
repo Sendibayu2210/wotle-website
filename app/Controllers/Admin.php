@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\PromoModel;
+use App\Models\UsersModel;
+use CodeIgniter\Commands\Server\Serve;
 
 class Admin extends BaseController
 {
@@ -10,10 +12,14 @@ class Admin extends BaseController
     {
         $this->validation = \Config\Services::validation();
         $this->PromoModel = new PromoModel();
+        $this->UsersModel = new UsersModel();
     }
 
     public function index()
     {
+        if (!session()->get('username')) {
+            return redirect('login');
+        }
         $data = [
             'title' => 'Wotle | Dashboard',
             'link' => 'dashboard',
@@ -23,6 +29,9 @@ class Admin extends BaseController
 
     public function users()
     {
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         $data = [
             'title' => 'Daftar Users',
             'link' => 'users',
@@ -36,7 +45,9 @@ class Admin extends BaseController
     // ================== PROMO ===========
     public function promo()
     {
-
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         $data = [
             'title' => 'Promo',
             'link' => 'promo',
@@ -46,6 +57,9 @@ class Admin extends BaseController
     }
     public function tambah_promo()
     {
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         $data = [
             'title' => 'Tambah Promo',
             'link' => 'promo',
@@ -55,6 +69,9 @@ class Admin extends BaseController
     }
     public function edit_promo($id)
     {
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         $promo = $this->PromoModel->find($id);
         if ($promo) {
             $data = [
@@ -68,6 +85,9 @@ class Admin extends BaseController
     }
     public function save_promo()
     {
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         if (!$this->validate([
             'judul' => [
                 'rules' => 'required',
@@ -132,6 +152,9 @@ class Admin extends BaseController
 
     public function update_promo($id)
     {
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         if (!$this->validate([
             'judul' => [
                 'rules' => 'required',
@@ -209,6 +232,9 @@ class Admin extends BaseController
 
     public function hapus_promo()
     {
+        if (session()->get('role') != 'admin') {
+            return redirect('dashboard');
+        }
         $id = $this->request->getVar('id');
         $promo = $this->PromoModel->find($id);
         $poster = 'img/promo/' . $promo['poster'];
@@ -224,6 +250,32 @@ class Admin extends BaseController
         return redirect()->to('/admin-promo');
     }
 
+
+    // users
+    // ajax get users
+    public function getUsers($role)
+    {
+        if ($this->request->isAJAX()) {
+            $users = $this->UsersModel->where('role', $role)->findAll();
+            return json_encode([
+                'success' => 'success',
+                'scrf' => csrf_hash(),
+                'users' => $users,
+            ]);
+        }
+    }
+    public function get_Users($role)
+    {
+        if ($this->request->isAJAX()) {
+            $users = $this->UsersModel->where('role', $role)->findAll();
+            return json_encode([
+                'success' => 'success',
+                'scrf' => csrf_hash(),
+                'users' => $users,
+                'role' => $role,
+            ]);
+        }
+    }
 
 
 

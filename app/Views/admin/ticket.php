@@ -1,7 +1,6 @@
-<?= $this->extend('layout/template'); ?>
+<?= $this->extend('layout/template-admin'); ?>
 <?= $this->section('content'); ?>
-<div class="d-flex">
-    <?= $this->include('sidebar-admin'); ?>
+<div class="container">
     <div id="ticket" class="bg-content w-100 px-4">
         <div class="h3 mt-5 mb-4 fw-bold pb-3 border-bottom text-lime">Daftar Tiket</div>
 

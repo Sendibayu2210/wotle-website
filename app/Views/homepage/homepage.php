@@ -153,7 +153,8 @@
                 </li>
             </ul>
             <div>
-                <a href="/dashboard" class="btn btn-outline-secondary btn-register">Register</a>
+                <a href="/login" class="btn btn-outline-secondary btn-register">Login</a>
+                <a href="/register" class="btn btn-outline-secondary btn-register">Register</a>
             </div>
         </div>
     </div>

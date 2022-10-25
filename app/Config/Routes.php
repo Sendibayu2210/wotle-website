@@ -37,9 +37,20 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+
+// AUTH
+$routes->get('/login', 'Auth::login');
+$routes->post('/cek-login', 'Auth::validasi_login');
+$routes->get('/logout', 'Auth::logout');
+
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
 $routes->get('/users', 'Admin::users');
+// ajax get users
+$routes->post('/getUsers/(:any)', 'Admin::getUsers/$1');
+$routes->get('/getUsers/(:any)', 'Admin::get_Users/$1');
+
+
 
 
 $routes->get('/admin-promo', 'Admin::promo');
