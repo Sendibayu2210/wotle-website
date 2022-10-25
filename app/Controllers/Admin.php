@@ -177,13 +177,13 @@ class Admin extends BaseController
             'tgl_mulai' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'isi artikel Tidak boleh kosong'
+                    'required' => 'Isikan Tanggal'
                 ]
             ],
             'tgl_akhir' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'isi artikel Tidak boleh kosong'
+                    'required' => 'Isikan Tanggal'
                 ]
             ],
             'berkas' => [

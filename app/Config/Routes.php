@@ -43,6 +43,9 @@ $routes->get('/login', 'Auth::login');
 $routes->post('/cek-login', 'Auth::validasi_login');
 $routes->get('/logout', 'Auth::logout');
 
+$routes->get('/register', 'Auth::register');
+$routes->post('/cek-register', 'Auth::cek_register');
+
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
 $routes->get('/users', 'Admin::users');

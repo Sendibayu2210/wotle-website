@@ -24,7 +24,6 @@ function toast_message()
     endif;
 }
 
-
 function cek_session()
 {
     if (!session()->get('username')) {
