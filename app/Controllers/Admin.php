@@ -20,9 +20,12 @@ class Admin extends BaseController
         if (!session()->get('username')) {
             return redirect('login');
         }
+        $session_user = session()->get('username');
+        $user = $this->UsersModel->where('username', $session_user)->first();
         $data = [
             'title' => 'Wotle | Dashboard',
             'link' => 'dashboard',
+            'user' => $user,
         ];
         return view('admin/dashboard', $data);
     }

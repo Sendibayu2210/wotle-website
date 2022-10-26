@@ -8,8 +8,8 @@
     <section id="content-admin" class="bg-content">
         <div class="d-flex justify-content-between">
             <div>
-                <div class="h4 fw-bold">Hello, Admin</div>
-                <div>Welcome back and explore the world</div>
+                <div class="h4 fw-bold">Halo, <?= $user['nama']; ?></div>
+                <div>Selamat datang</div>
             </div>
             <div class="notification shadow d-flex justify-content-center">
                 <div class="pt-2"><i class="fa-regular fa-bell h5 text-secondary"></i></div>

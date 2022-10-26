@@ -19,6 +19,9 @@ class Auth extends BaseController
 
     public function register()
     {
+        if (session()->get('username')) {
+            return redirect('dashboard');
+        }
         $data = [
             'title' => 'Register - Wotle',
             'validation' => $this->validation,
@@ -112,8 +115,12 @@ class Auth extends BaseController
 
     public function login()
     {
+        if (session()->get('username')) {
+            return redirect('dashboard');
+        }
         $data = [
             'title' => 'Login | Wotle',
+            'validation' => $this->validation,
         ];
         return view('homepage/login', $data);
     }
@@ -125,22 +132,26 @@ class Auth extends BaseController
         $password = $this->request->getVar('password');
         $user = $this->UsersModel->where('username', $username)->first();
         if ($user) {
-            $cek_pass = $this->UsersModel->where('password', $password)->first();
-            if ($cek_pass) {
+            if ($password == $user['password']) {
                 $set_session = [
                     'username' => $user['username'],
                     'role' => $user['role'],
                 ];
                 session()->set($set_session);
-                return redirect('dashboard');
+                return json_encode([
+                    'message' => 'login-success',
+                    'redirect' => 'dashboard',
+                ]);
             } else {
-                session()->setFlashdata('message', 'Password Salah');
-                return redirect('login');
+                return json_encode([
+                    'message' => 'password salah',
+                ]);
             }
         } else {
-            session()->setFlashdata('message', 'Email tidak ditemukan');
-            session()->setFlashdata('username', $username);
-            return redirect('login');
+            return json_encode([
+                'message' => 'email tidak ditemukan',
+                'username' => $username,
+            ]);
         }
     }
 

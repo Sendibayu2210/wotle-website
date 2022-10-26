@@ -35,8 +35,8 @@
             </a>
         <?php endif; ?>
         <a href="" class="d-flex py-2 ps-4">
-            <div class="me-2"><i class="fa-solid fa-envelope"></i></div>
-            <div class="circle-notif">Pesan</div>
+            <div class="me-2"><i class="fa-solid fa-bell"></i></div>
+            <div class="circle-notif">Notifikasi</div>
         </a>
         <a href="/logout" class="d-flex py-2 ps-4 btn-logout">
             <div class="me-2"><i class="fa-solid fa-sign-out"></i></div>

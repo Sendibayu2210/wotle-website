@@ -18,6 +18,7 @@
 
     <?= $this->renderSection('content'); ?>
 
+    <script src="/js/wotle.js"></script>
     <script src="/custom_vendor/bootstrap5/js/bootstrap.bundle.min.js"></script>
     <script src="/custom_vendor/fontawesome612/js/all.min.js"></script>
 </body>
