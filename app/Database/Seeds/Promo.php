@@ -4,6 +4,7 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 use CodeIgniter\I18n\Time;
+
 class Promo extends Seeder
 {
     public function run()
@@ -17,6 +18,9 @@ class Promo extends Seeder
                 'tgl_mulai' => '2022-10-23',
                 'tgl_akhir' => '2022-10-30',
                 'status' => 'aktif',
+                'reward_point' => '3000',
+                'total_persen' => '30',
+                'maksimal_promo' => '20000',
                 "created_at" => Time::now(),
                 "updated_at" => Time::now(),
             ],
@@ -28,6 +32,9 @@ class Promo extends Seeder
                 'tgl_mulai' => '2022-10-23',
                 'tgl_akhir' => '2022-10-30',
                 'status' => 'aktif',
+                'reward_point' => '3000',
+                'total_persen' => '30',
+                'maksimal_promo' => '20000',
                 "created_at" => Time::now(),
                 "updated_at" => Time::now(),
             ],

@@ -45,13 +45,17 @@ $routes->get('/logout', 'Auth::logout');
 
 $routes->get('/register', 'Auth::register');
 $routes->post('/cek-register', 'Auth::cek_register');
+$routes->post('/register-valid', 'Auth::save_register');
 
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
 $routes->get('/users', 'Admin::users');
 // ajax get users
 $routes->post('/getUsers/(:any)', 'Admin::getUsers/$1');
-$routes->get('/getUsers/(:any)', 'Admin::get_Users/$1');
+$routes->post('/user/(:any)', 'Admin::detail_user/$1');
+$routes->post('/search-users', 'Admin::cari_users');
+// driver
+$routes->post('/change-status', 'Admin::update_status_user');
 
 
 

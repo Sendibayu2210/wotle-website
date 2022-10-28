@@ -49,6 +49,12 @@ a{
 .br-15{
     border-radius: 15px;
 }
+.br-20{
+    border-radius: 20px;
+}
+.max-width-100{
+    max-width: 100px;
+}
 .max-width-300{
     max-width: 300px;
 }
@@ -66,7 +72,7 @@ a{
 }
 
 
-/* login */
+/* login & register*/
 .background-login{    
     height: 100vh;
 }
@@ -75,7 +81,9 @@ a{
     height: 100%;
     object-fit: cover;    
 }
-.btn-login{
+
+.btn-login,
+.btn-register{
     border-radius: 20px;
     background: linear-gradient(to right,#316789, #adc8d8);
     border: 0;
@@ -83,6 +91,11 @@ a{
 }
 .login form{
     margin-top: 50px;
+}
+
+/* Register */
+.background-register img{
+    max-width: 400px;    
 }
 
 /* Sidebar Admin*/

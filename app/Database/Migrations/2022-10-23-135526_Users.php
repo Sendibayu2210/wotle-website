@@ -44,7 +44,7 @@ class Users extends Migration
             ],
             'status' => [
                 'type' => 'enum',
-                'constraint' => ['aktif', 'nonaktif', 'ditangguhkan'],
+                'constraint' => ['aktif', 'nonaktif', 'ditangguhkan', 'register'],
             ],
             'point' => [
                 'type' => 'varchar',

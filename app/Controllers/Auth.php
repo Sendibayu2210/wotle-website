@@ -31,88 +31,88 @@ class Auth extends BaseController
 
     public function cek_register()
     {
+        // cek username / email sudah ada atau belum 
+        $username = $this->request->getVar('email');
+        $user = $this->UsersModel->where('username', $username)->first();
+        if ($user) {
+            return json_encode([
+                'message' => 'username ada',
+            ]);
+        } else {
+            return json_encode([
+                'message' => 'validasi_register_success',
+            ]);
+        }
+    }
+
+    public function save_register()
+    {
+
         if (!$this->validate([
-            'nama' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'nama Tidak boleh kosong'
-                ]
-            ],
-            'email' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Email Tidak boleh kosong'
-                ]
-            ],
-            'password' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'password artikel Tidak boleh kosong'
-                ]
-            ],
             'ktp' => [
-                'rules' => 'uploaded[ktp]|mime_in[ktp,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[ktp,2048]',
+                'rules' => 'uploaded[ktp]|mime_in[ktp,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[ktp,3072]',
                 'errors' => [
                     'uploaded' => 'Harus Ada File yang diupload',
                     'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
-                    'max_size' => 'Ukuran File Maksimal 2 MB'
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
                 ]
             ],
             'sim' => [
-                'rules' => 'uploaded[sim]|mime_in[sim,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[sim,2048]',
+                'rules' => 'uploaded[sim]|mime_in[sim,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[sim,3072]',
                 'errors' => [
                     'uploaded' => 'Harus Ada File yang diupload',
                     'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
-                    'max_size' => 'Ukuran File Maksimal 2 MB'
-                ]
-            ],
-            'plat_nomor' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'Plat nomor Tidak boleh kosong'
-                ]
-            ],
-            'tipe_kendaraan' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => 'tipe kendaraan Tidak boleh kosong'
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
                 ]
             ],
             'foto' => [
-                'rules' => 'uploaded[foto]|mime_in[foto,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[foto,2048]',
+                'rules' => 'uploaded[foto]|mime_in[foto,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[foto,3072]',
                 'errors' => [
                     'uploaded' => 'Harus Ada File yang diupload',
                     'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
-                    'max_size' => 'Ukuran File Maksimal 2 MB'
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
                 ]
             ],
         ])) {
             session()->setFlashdata('message', $this->validator->listErrors());
-            session()->setFlashdata('message1', 'Error');
             return redirect('register')->withInput();
         }
 
+        $dataBerkasKtp = $this->request->getFile('ktp');
+        $fileNameKtp = $dataBerkasKtp->getRandomName();
+        $dataBerkasKtp->move('img/ktp_driver/', $fileNameKtp);
 
+        $dataBerkasSim = $this->request->getFile('sim');
+        $fileNameSim = $dataBerkasSim->getRandomName();
+        $dataBerkasSim->move('img/sim_driver/', $fileNameSim);
 
+        $dataBerkasFoto = $this->request->getFile('foto');
+        $fileNameFoto = $dataBerkasFoto->getRandomName();
+        $dataBerkasFoto->move('img/foto/', $fileNameFoto);
 
-        // $data = [
-        //     'nama' => htmlspecialchars($this->request->getVar('nama')),
-        //     'email' => htmlspecialchars($this->request->getVar('email')),
-        //     'password' => htmlspecialchars($this->request->getVar('password')),
-        //     'ktp' => htmlspecialchars($this->request->getVar('ktp')),
-        //     'sim' => htmlspecialchars($this->request->getVar('sim')),
-        //     'plat_nomor' => htmlspecialchars($this->request->getVar('plat_nomor')),
-        //     'tipe_kendaraan' => htmlspecialchars($this->request->getVar('tipe_kendaraan')),
-        //     'foto' => htmlspecialchars($this->request->getVar('foto')),
-        //     'referal' => htmlspecialchars($this->request->getVar('referal')),
-        //     'tautan_referal' => htmlspecialchars($this->request->getVar('tautan_referal')),
-        //     'point' => '0',
-        //     'status' => 'nonaktif',
-        // ];
-
-        // $insert = $this->UsersModel->insert($data);
+        $data = [
+            'nama' => htmlspecialchars($this->request->getVar('nama')),
+            'username' => htmlspecialchars($this->request->getVar('email')),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+            'ktp' => $fileNameKtp,
+            'sim' => $fileNameSim,
+            'plat_nomor' => htmlspecialchars($this->request->getVar('plat_nomor')),
+            'tipe_kendaraan' => htmlspecialchars($this->request->getVar('tipe_kendaraan')),
+            'foto' => $fileNameFoto,
+            'referal' => random_character(),
+            'tautan_referal' => htmlspecialchars($this->request->getVar('kode_referal')),
+            'point' => '0',
+            'status' => 'register',
+            'role' => 'driver',
+        ];
+        $insert = $this->UsersModel->insert($data);
+        if ($insert) {
+            session()->setFlashdata('message_auth', 'Registrasi berhasil. proses validasi paling lambat 1x24jam <br> konfirmasi selanjutnya akan diberitahukan melalui email.');
+            return redirect('login');
+        } else {
+            return redirect('register');
+        }
     }
-
     public function login()
     {
         if (session()->get('username')) {
@@ -127,24 +127,34 @@ class Auth extends BaseController
 
     public function validasi_login()
     {
-        // cek email/username
         $username = $this->request->getVar('username');
         $password = $this->request->getVar('password');
+        // cek email/username
         $user = $this->UsersModel->where('username', $username)->first();
         if ($user) {
-            if ($password == $user['password']) {
-                $set_session = [
-                    'username' => $user['username'],
-                    'role' => $user['role'],
-                ];
-                session()->set($set_session);
+            if ($user['status'] == 'aktif') {
+                if (password_verify($password, $user['password'])) {
+                    $set_session = [
+                        'username' => $user['username'],
+                        'role' => $user['role'],
+                    ];
+                    session()->set($set_session);
+                    return json_encode([
+                        'message' => 'login-success',
+                        'redirect' => 'dashboard',
+                    ]);
+                } else {
+                    return json_encode([
+                        'message' => 'password salah',
+                    ]);
+                }
+            } else if ($user['status'] == 'nonaktif') {
                 return json_encode([
-                    'message' => 'login-success',
-                    'redirect' => 'dashboard',
+                    'message' => 'akun nonaktif',
                 ]);
-            } else {
+            } else if ($user['status'] == 'ditangguhkan') {
                 return json_encode([
-                    'message' => 'password salah',
+                    'message' => 'akun ditangguhkan',
                 ]);
             }
         } else {

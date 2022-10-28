@@ -11,18 +11,18 @@ class Promo extends Migration
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
-                'constraint' => 5,            
+                'constraint' => 5,
                 'auto_increment' => true,
             ],
 
             'kode_promo' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255',
-            ],            
+            ],
             'judul' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255',
-            ],            
+            ],
             'deskripsi' => [
                 'type' => 'TEXT',
             ],
@@ -31,14 +31,26 @@ class Promo extends Migration
                 'constraint' => '255',
             ],
             'tgl_mulai' => [
-                'type' => 'date',                
+                'type' => 'date',
             ],
             'tgl_akhir' => [
-                'type' => 'date',                
+                'type' => 'date',
             ],
             'status' => [
                 'type' => 'ENUM',
                 'constraint' => ['aktif', 'expired']
+            ],
+            'reward_point' => [
+                'type' => 'varchar',
+                'contraint' => 20
+            ],
+            'total_persen' => [
+                'type' => 'varchar',
+                'contraint' => 5
+            ],
+            'maksimal_promo' => [
+                'type' => 'varchar',
+                'contraint' => 20
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -47,7 +59,7 @@ class Promo extends Migration
             'updated_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
-            ],          
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('promo', true);

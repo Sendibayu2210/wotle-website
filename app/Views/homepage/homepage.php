@@ -99,10 +99,6 @@
         background: #f6f6f8;
     }
 
-    .btn-register {
-        border-radius: 20px;
-    }
-
     .logo-mitra img {
         width: 100px;
         margin-right: 15px;
@@ -153,8 +149,8 @@
                 </li>
             </ul>
             <div>
-                <a href="/login" class="btn btn-outline-secondary btn-register me-2">Login</a>
-                <a href="/register" class="btn btn-outline-secondary btn-register">Register</a>
+                <a href="/login" class="btn btn-outline-secondary br-20 me-2">Login</a>
+                <a href="/register" class="btn btn-outline-secondary br-20">Register</a>
             </div>
         </div>
     </div>

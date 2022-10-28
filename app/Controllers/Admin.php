@@ -152,7 +152,6 @@ class Admin extends BaseController
         session()->setFlashdata('message', 'Data Promo Berhasil di Upload');
         return redirect('admin-promo');
     }
-
     public function update_promo($id)
     {
         if (session()->get('role') != 'admin') {
@@ -232,7 +231,6 @@ class Admin extends BaseController
         }
         return redirect('admin-promo');
     }
-
     public function hapus_promo()
     {
         if (session()->get('role') != 'admin') {
@@ -258,24 +256,82 @@ class Admin extends BaseController
     // ajax get users
     public function getUsers($role)
     {
+        $status = $this->request->getVar('status');
         if ($this->request->isAJAX()) {
-            $users = $this->UsersModel->where('role', $role)->findAll();
+            $users = $this->UsersModel->where('role', $role)->where('status', $status)->findAll();
+            $count_user_aktif = $this->UsersModel->where('role', $role)->where('status', 'aktif')->countAllResults();
+            $count_user_nonaktif = $this->UsersModel->where('role', $role)->where('status', 'nonaktif')->countAllResults();
+            $count_user_ditangguhkan = $this->UsersModel->where('role', $role)->where('status', 'ditangguhkan')->countAllResults();
             return json_encode([
-                'success' => 'success',
+                'message' => 'success',
                 'scrf' => csrf_hash(),
                 'users' => $users,
+                'count_user_aktif' => $count_user_aktif,
+                'count_user_nonaktif' => $count_user_nonaktif,
+                'count_user_ditangguhkan' => $count_user_ditangguhkan,
+                'status' => $status,
             ]);
         }
     }
-    public function get_Users($role)
+
+    public function detail_user($id)
     {
-        if ($this->request->isAJAX()) {
-            $users = $this->UsersModel->where('role', $role)->findAll();
+        $user = $this->UsersModel->find($id);
+        return json_encode([
+            'user' => $user,
+        ]);
+    }
+
+    public function update_status_user()
+    {
+        $id_driver = $this->request->getVar('id');
+        $status = $this->request->getVar('status');
+        $driver = $this->UsersModel->find($id_driver);
+        $data = [
+            'status' => $status
+        ];
+        $aktivasi = $this->UsersModel->update($id_driver, $data);
+        if ($aktivasi) {
             return json_encode([
-                'success' => 'success',
-                'scrf' => csrf_hash(),
+                'message' => 'driver ' . $driver['nama'] . ' berhasil di' . $status,
+                'id' => $id_driver,
+                'role' => $driver['role'],
+            ]);
+        } else {
+            return json_encode([
+                'message' => 'driver ' . $driver['nama'] . ' gagal di' . $status,
+                'id' => $id_driver,
+                'role' => $driver['role'],
+            ]);
+        }
+    }
+
+    public function cari_users()
+    {
+        $role = $this->request->getVar('role');
+        $search = $this->request->getVar('search');
+        $status = $this->request->getVar('status');
+        $users = $this->UsersModel->where('role', $role)->where('status', $status)->like('nama', $search)->findAll();
+        $count_user_aktif = $this->UsersModel->where('role', $role)->where('status', 'aktif')->countAllResults();
+        $count_user_nonaktif = $this->UsersModel->where('role', $role)->where('status', 'nonaktif')->countAllResults();
+        $count_user_ditangguhkan = $this->UsersModel->where('role', $role)->where('status', 'ditangguhkan')->countAllResults();
+        if ($users) {
+            return json_encode([
+                'message' => 'success_search',
                 'users' => $users,
-                'role' => $role,
+                'count_user_aktif' => $count_user_aktif,
+                'count_user_nonaktif' => $count_user_nonaktif,
+                'count_user_ditangguhkan' => $count_user_ditangguhkan,
+                'status' => $status,
+            ]);
+        } else {
+            return json_encode([
+                'message' => 'search_not_found',
+                'search' => $search,
+                'count_user_aktif' => $count_user_aktif,
+                'count_user_nonaktif' => $count_user_nonaktif,
+                'count_user_ditangguhkan' => $count_user_ditangguhkan,
+                'status' => $status,
             ]);
         }
     }

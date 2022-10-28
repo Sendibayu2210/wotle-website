@@ -1,6 +1,5 @@
 <section id="sidebar" class="">
-    <div class="logo-title mb-5">
-        <img src="" alt="">
+    <div class="logo-title mb-5 mt-5">
         <div class="d-flex">
             <div><img src="/img/logo/logo_wotle.png" alt="" class="logo-wotle"></div>
             <div class="h4 fw-bold my-auto ms-3 color-wotle">WOTLE</div>
