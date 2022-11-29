@@ -47,15 +47,41 @@
                 <div class="col-lg-5">
                     <div class="card pb-4 border-0">
                         <div class="card-body">
-                            <label for="" class="mb-3">Pilih Gambar</label>
-                            <input type="file" name="berkas" id="input-file" onchange="imgPreview()" class="form-control <?= ($validation->hasError('berkas')) ? 'is-invalid' : ''; ?>">
-                            <div class="invalid-feedback"><?= $validation->getError('berkas'); ?></div>
-                            <div class="mt-4 text-center card-image-preview hide">
-                                <div class="mb-4">Image Preview</div>
-                                <img src="https://www.static-src.com/siva/asset//09_2019/1200x460_Header_Microsite_Wonderful_Indonesia.jpg" alt="" class="img-preview max-width-300">
+                            <div class="mb-3">
+                                <label for="">Pilih kategori poin promo</label>                                
+                                <div class="row px-3">
+                                    <div class="form-check col-6">
+                                      <input class="form-check-input <?= ($validation->hasError('poin_promo')) ? 'is-invalid' : ''; ?> " type="radio" name="poin_promo" id="poin" value="poin">
+                                      <label class="form-check-label cursor-pointer" for="poin">
+                                        Berikan Poin
+                                      </label>
+                                    </div>
+                                    <div class="form-check col-6">
+                                      <input class="form-check-input <?= ($validation->hasError('poin_promo')) ? 'is-invalid' : ''; ?> " type="radio" name="poin_promo" id="persen" value="persen">
+                                      <label class="form-check-label cursor-pointer" for="persen">
+                                        Berikan diskon Persen
+                                      </label>
+                                    </div>
+                                    <div class="invalid-feedback"><?= $validation->getError('poin_promo'); ?></div>
+                                </div>                                
+                                <div>
+                                    <label for="">Masukan Nilai</label>
+                                    <input type="text" class="form-control mt-1 <?= ($validation->hasError('nilai_promo')) ? 'is-invalid' : ''; ?>" name="nilai_promo">
+                                    <div class="invalid-feedback"><?= $validation->getError('nilai_promo'); ?></div>
+                                </div>
                             </div>
+
+                           <div>
+                                <label for="" class="mb-3">Pilih Gambar</label>
+                                <input type="file" name="berkas" id="input-file" onchange="imgPreview()" class="form-control <?= ($validation->hasError('berkas')) ? 'is-invalid' : ''; ?>">
+                                <div class="invalid-feedback"><?= $validation->getError('berkas'); ?></div>
+                                <div class="mt-4 text-center card-image-preview hide">
+                                    <div class="mb-4">Image Preview</div>
+                                    <img src="" alt="" class="img-preview max-width-300">
+                                </div>
+                               </div>
                             <div class="mt-4">
-                                <button type="submit" class="btn btn-lime w-100">Publish</button>
+                                <button type="submit" class="btn btn-wotle w-100">Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -63,8 +89,6 @@
             </div>
         </form>
     </div>
-
-
 </div>
 
 <?= $this->endSection(); ?>

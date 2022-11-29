@@ -15,7 +15,7 @@ class Auth extends BaseController
     public function index()
     {
         //
-    }
+    }   
 
     public function register()
     {
@@ -113,10 +113,11 @@ class Auth extends BaseController
             return redirect('register');
         }
     }
+
     public function login()
     {
-        if (session()->get('username')) {
-            return redirect('dashboard');
+        if (session()->get('email_wotle')) {            
+            return redirect('dashboard');            
         }
         $data = [
             'title' => 'Login | Wotle',
@@ -125,44 +126,21 @@ class Auth extends BaseController
         return view('homepage/login', $data);
     }
 
+
     public function validasi_login()
     {
-        $username = $this->request->getVar('username');
-        $password = $this->request->getVar('password');
-        // cek email/username
-        $user = $this->UsersModel->where('username', $username)->first();
-        if ($user) {
-            if ($user['status'] == 'aktif') {
-                if (password_verify($password, $user['password'])) {
-                    $set_session = [
-                        'username' => $user['username'],
-                        'role' => $user['role'],
-                    ];
-                    session()->set($set_session);
-                    return json_encode([
-                        'message' => 'login-success',
-                        'redirect' => 'dashboard',
-                    ]);
-                } else {
-                    return json_encode([
-                        'message' => 'password salah',
-                    ]);
-                }
-            } else if ($user['status'] == 'nonaktif') {
-                return json_encode([
-                    'message' => 'akun nonaktif',
-                ]);
-            } else if ($user['status'] == 'ditangguhkan') {
-                return json_encode([
-                    'message' => 'akun ditangguhkan',
-                ]);
-            }
-        } else {
-            return json_encode([
-                'message' => 'email tidak ditemukan',
-                'username' => $username,
-            ]);
-        }
+        $email = $this->request->getVar('e');
+        $role = $this->request->getVar('r');
+        
+        $set_session = [
+            'email_wotle' => $email,
+            'role_wotle' => $role,
+        ];
+        session()->set($set_session);        
+        return json_encode([
+            'message' => 'valid',
+            'redirect' => 'dashboard',
+        ]);
     }
 
     public function logout()

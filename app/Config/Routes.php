@@ -36,11 +36,14 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/finishpayment', 'Home::payment_success');
+$routes->get('/unfinishpayment', 'Home::payment_failed');
+$routes->get('/errorpayment', 'Home::payment_error');
 
 
 // AUTH
 $routes->get('/login', 'Auth::login');
-$routes->post('/cek-login', 'Auth::validasi_login');
+$routes->post('/valid-login', 'Auth::validasi_login');
 $routes->get('/logout', 'Auth::logout');
 
 $routes->get('/register', 'Auth::register');
@@ -54,11 +57,10 @@ $routes->get('/users', 'Admin::users');
 $routes->post('/getUsers/(:any)', 'Admin::getUsers/$1');
 $routes->post('/user/(:any)', 'Admin::detail_user/$1');
 $routes->post('/search-users', 'Admin::cari_users');
+
+
 // driver
 $routes->post('/change-status', 'Admin::update_status_user');
-
-
-
 
 $routes->get('/admin-promo', 'Admin::promo');
 $routes->get('/tambah-promo', 'Admin::tambah_promo');
@@ -66,13 +68,26 @@ $routes->post('/save-promo', 'Admin::save_promo');
 $routes->delete('/hapus-promo', 'Admin::hapus_promo');
 $routes->get('/edit-promo/(:num)', 'Admin::edit_promo/$1');
 $routes->post('/update-promo/(:num)', 'Admin::update_promo/$1');
-
-
+$routes->post('/detail-promo','Admin::detail_promo');
 
 $routes->get('/admin', 'Admin::index');
 $routes->get('/payment', "Admin::payment");
 $routes->get('/favorite', "Admin::favorite");
 $routes->get('/tiket', "Admin::tiket");
+
+$routes->post('/uploadFileDriver','Admin::upload_file_driver');
+$routes->get('/download','Home::download');
+
+$routes->post('/send-email', 'Home::kirim_email');
+$routes->get('/verifikasi-akun', 'Home::verifikasi_akun');
+$routes->get('/destination-group', 'Admin::group_destinasi');
+
+
+// Profile
+$routes->get("/profile",'General::profile');
+
+
+
 
 /*
  * --------------------------------------------------------------------

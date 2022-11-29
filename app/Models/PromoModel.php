@@ -14,11 +14,6 @@ class PromoModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['judul', 'kode_promo', 'deskripsi', 'poster', 'tgl_mulai', 'tgl_akhir', 'status'];
-
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
+    protected $allowedFields    = ['judul', 'kode_promo', 'deskripsi', 'gambar', 'tgl_mulai', 'tgl_akhir', 'jumlah_poin','jumlah_persen', 'created_at','updated_at'];    
+    
 }

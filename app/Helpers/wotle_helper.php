@@ -9,7 +9,7 @@ function formatRupiah($rupiah)
 
 function titleTop($judul)
 {
-    echo '<div class="h3 mt-5 mb-4 fw-bold pb-3 border-bottom text-lime">' . $judul . '</div>';
+    echo '<div class="h3 mt-5 mb-4 fw-bold pb-3 border-bottom text-wotle">' . $judul . '</div>';
 }
 
 function toast_message()
@@ -26,7 +26,7 @@ function toast_message()
 
 function cek_session()
 {
-    if (!session()->get('username')) {
+    if (!session()->get('email_wotle')) {
         return redirect('login');
     }
 }

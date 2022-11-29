@@ -5,22 +5,21 @@
 
         <?= toast_message(); ?>
 
-        <div class="d-flex justify-content-between mt-5 mb-4 pb-3 border-bottom">
-            <div class="h3 me-4 my-auto text-lime fw-bold">Promo</div>
-            <a href="tambah-promo" class="btn btn-lime btn-sm">Tambah</a>
+        <div class="d-flex mt-5 mb-4 pb-3 border-bottom">
+            <div class="h3 me-4 my-auto text-wotle fw-bold">Promo</div>
+            <a href="tambah-promo" class="btn btn-wotle btn-sm">Tambah</a>
         </div>
-        <div class="row">
-            <?php $gambar = 'https://www.static-src.com/siva/asset//09_2019/1200x460_Header_Microsite_Wonderful_Indonesia.jpg' ?>
+        <div class="row">            
             <?php foreach ($promo as $x) : ?>
                 <div class="col-lg-4 col-md-6 col-12 mb-4">
-                    <div class="card card-promo br-15 border-0 cursor-pointer" data-bs-toggle="modal" data-bs-target="#detail_promo" data-id="<?= $x['id']; ?>" data-judul="<?= $x['judul']; ?>" data-deskripsi="<?= $x['deskripsi']; ?>" data-poster="<?= $x['poster']; ?>" data-mulai="<?= $x['tgl_mulai']; ?>" data-akhir="<?= date('d M Y', strtotime($x['tgl_akhir'])); ?>" data-status="<?= $x['status']; ?>">
-                        <img src="/img/promo/<?= $x['poster']; ?>" class="card-img-top">
+                    <div class="card card-promo br-15 border-0 cursor-pointer" data-bs-toggle="modal" data-bs-target="#detail_promo" data-id="<?= $x['id']; ?>">
+                        <img src="<?= $x['gambar']; ?>" class="card-img-top">
                         <div class="card-body">
                             <p class="card-text"><?= $x['judul']; ?></p>
                             <div class="small"><i class="fa-solid fa-pen me-2"></i>Kode : <?= $x['kode_promo']; ?></div>
                             <div class="d-flex justify-content-between small">
                                 <div class=""><i class="fa-solid fa-calendar-days me-2"></i>Berlaku hingga <?= date('d M Y', strtotime($x['tgl_akhir'])); ?></div>
-                                <div class="<?= ($x['status'] == 'aktif') ? 'text-lime' : "text-danger"; ?>"><?= $x['status']; ?></div>
+                                <div class="text-capitalize <?= ($x['status'] == 'aktif') ? 'btn btn-sm btn-wotle' : "btn btn-sm btn-danger"; ?>"><?= $x['status']; ?></div>
                             </div>
                         </div>
                     </div>
@@ -57,7 +56,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger btn-hapus" data-bs-toggle="modal" data-bs-target="#delete_promo">Hapus</button>
-                <a href="" class="btn btn-lime btn-edit">Edit</a>
+                <a href="" class="btn btn-wotle btn-edit">Edit</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
@@ -96,27 +95,33 @@
 
         $('.card-promo').click(function() {
             let id = $(this).data('id');
-            let judul = $(this).data('judul');
-            let deskripsi = $(this).data('deskripsi');
-            let poster = $(this).data('poster');
-            let mulai = $(this).data('mulai');
-            let akhir = $(this).data('akhir');
-            let status = $(this).data('status');
+            $.ajax({
+                url : '/detail-promo',
+                type : 'post',
+                dataType : 'json',
+                data  : {
+                    id : id,
+                },
+                success : function(result){
+                    if(result.code == '200'){
+                         $('.btn-edit').attr('href', '/edit-promo/' + result.promo.id);
+                        $('#delete_promoLabel').html('Konfirmasi Penghapusan')
+                        $('#id_promo_delete').val(result.promo.id)
+                        $('.detail-judul').html(result.promo.judul);
+                        $('.detail-deskripsi').html(result.promo.deskripsi);
+                        $('.detail-poster').attr('src', result.promo.gambar);
+                        $('.detail-expired').html('berlaku hingga : ' + result.promo.tgl_akhir)
+                        $("#detail_promoLabel").html(result.promo.judul)
+                        if (result.promo.status == 'aktif') {
+                            $('.detail-status').html('Status : ' + result.promo.status).addClass('text-wotle').removeClass('text-danger');
+                        } else {
+                            $('.detail-status').html('Status : ' + result.promo.status).removeClass('text-wotle').addClass('text-danger');
+                        }
+                    }
+                }
+            })
 
-            $('.btn-edit').attr('href', '/edit-promo/' + id);
-
-            $('#delete_promoLabel').html('Konfirmasi Penghapusan')
-            $('#id_promo_delete').val(id)
-            $('.detail-judul').html(judul);
-            $('.detail-deskripsi').html(deskripsi);
-            $('.detail-poster').attr('src', '/img/promo/' + poster);
-            $('.detail-expired').html('berlaku hingga : ' + akhir)
-            $("#detail_promoLabel").html(judul)
-            if (status == 'aktif') {
-                $('.detail-status').html('Status : ' + status).addClass('text-lime').removeClass('text-danger');
-            } else {
-                $('.detail-status').html('Status : ' + status).removeClass('text-lime').addClass('text-danger');
-            }
+           
         })
     })
 </script>

@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Models\PromoModel;
 use App\Models\UsersModel;
+use App\Models\ListdestinationModel;
 use CodeIgniter\Commands\Server\Serve;
+use CodeIgniter\I18n\Time;
 
 class Admin extends BaseController
 {
@@ -13,26 +15,32 @@ class Admin extends BaseController
         $this->validation = \Config\Services::validation();
         $this->PromoModel = new PromoModel();
         $this->UsersModel = new UsersModel();
+        $this->ListdestinationModel = new ListdestinationModel();
     }
 
     public function index()
     {
-        if (!session()->get('username')) {
+        if (!session()->get('email_wotle')) {
             return redirect('login');
         }
-        $session_user = session()->get('username');
-        $user = $this->UsersModel->where('username', $session_user)->first();
+        $session_user = session()->get('email_wotle');
+        $user = $this->UsersModel->where('email', $session_user)->first();
         $data = [
             'title' => 'Wotle | Dashboard',
             'link' => 'dashboard',
             'user' => $user,
+            'validation' => $this->validation,
         ];
-        return view('admin/dashboard', $data);
+        if(session()->get('role_wotle') == 'admin'){
+            return view('admin/dashboard', $data);
+        }else{
+            return view('driver/dashboard_driver', $data);            
+        }
     }
 
     public function users()
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
         $data = [
@@ -43,12 +51,86 @@ class Admin extends BaseController
         return view('admin/users', $data);
     }
 
+    public function upload_file_driver()
+    {
+        if (!$this->validate([
+            'file_ktp' => [
+                'rules' => 'uploaded[file_ktp]|mime_in[file_ktp,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[file_ktp,3072]',
+                'errors' => [
+                    'uploaded' => 'upload file KTP',
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
+                ]
+            ],
+            'file_sim' => [
+                'rules' => 'uploaded[file_sim]|mime_in[file_sim,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[file_sim,3072]',
+                'errors' => [
+                    'uploaded' => 'upload file SIM',
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
+                ]
+            ],
+            'file_stnk' => [
+                'rules' => 'uploaded[file_stnk]|mime_in[file_stnk,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[file_stnk,3072]',
+                'errors' => [
+                    'uploaded' => 'upload file STNK',
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
+                ]
+            ],  
+            'file_skck' => [
+                'rules' => 'uploaded[file_skck]|mime_in[file_skck,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[file_skck,3072]',
+                'errors' => [
+                    'uploaded' => 'upload file SKCK',
+                    'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
+                    'max_size' => 'Ukuran File Maksimal 3 MB'
+                ]
+            ],           
+        ])) {
+            session()->setFlashdata('message', $this->validator->listErrors());
+            return redirect()->back()->withInput();
+        }
+
+        $dataBerkasKtp = $this->request->getFile('file_ktp');
+        $fileNameKtp = $dataBerkasKtp->getRandomName();
+        $dataBerkasKtp->move('wotle_assets/img/ktp_driver/', $fileNameKtp);
+
+        $dataBerkasSim = $this->request->getFile('file_sim');
+        $fileNameSim = $dataBerkasSim->getRandomName();
+        $dataBerkasSim->move('wotle_assets/img/sim_driver/', $fileNameSim);
+
+        $dataBerkasStnk = $this->request->getFile('file_stnk');
+        $fileNameStnk = $dataBerkasStnk->getRandomName();
+        $dataBerkasStnk->move('wotle_assets/img/stnk_driver/', $fileNameStnk);
+
+        $dataBerkasSkck = $this->request->getFile('file_skck');
+        $fileNameSkck = $dataBerkasSkck->getRandomName();
+        $dataBerkasSkck->move('wotle_assets/img/Skck_driver/', $fileNameSkck);
+        
+
+
+
+        $id = $this->request->getVar('id-user');
+        $data = [            
+            'ktp' => 'http://localhost:8080/wotle_assets/img/ktp_driver/'.$fileNameKtp,
+            'sim' => 'http://localhost:8080/wotle_assets/img/sim_driver/'. $fileNameSim,                    
+            'stnk' => 'http://localhost:8080/wotle_assets/img/stnk_driver/'. $fileNameStnk,                    
+            'skck' => 'http://localhost:8080/wotle_assets/img/skck_driver/'. $fileNameSkck,                    
+            
+        ];
+        $insert = $this->UsersModel->update($id, $data);
+        if ($insert) {            
+            return redirect('dashboard');
+        } else {
+            return redirect('dashboard');
+        }
+    }   
 
 
     // ================== PROMO ===========
     public function promo()
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
         $data = [
@@ -60,7 +142,7 @@ class Admin extends BaseController
     }
     public function tambah_promo()
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
         $data = [
@@ -72,7 +154,7 @@ class Admin extends BaseController
     }
     public function edit_promo($id)
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
         $promo = $this->PromoModel->find($id);
@@ -88,53 +170,75 @@ class Admin extends BaseController
     }
     public function save_promo()
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
+
         if (!$this->validate([
             'judul' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Judul Tidak boleh kosong'
-                ]
+                    'required' => 'Judul Tidak boleh kosong',
+                ],
             ],
             'kode_promo' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Kode promo Tidak boleh kosong'
-                ]
+                    'required' => 'Kode promo Tidak boleh kosong',
+                ],
             ],
             'deskripsi' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'isi artikel Tidak boleh kosong'
-                ]
+                    'required' => 'Deskripsi tidak boleh kosong',
+                ],
+            ],
+            'poin_promo' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih dahulu kategori',
+                ],
+            ],
+            'nilai_promo' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Masukan jumlah nilai',
+                ],
             ],
             'tgl_mulai' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'isi artikel Tidak boleh kosong'
-                ]
+                    'required' => 'Periode mulai promo harus diisi',
+                ],
             ],
             'tgl_akhir' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'isi artikel Tidak boleh kosong'
-                ]
+                    'required' => 'Periode akhir promo harus diisi',
+                ],
             ],
             'berkas' => [
                 'rules' => 'uploaded[berkas]|mime_in[berkas,image/jpg,image/jpeg,image/gif,image/png,image/svg/]|max_size[berkas,2048]',
                 'errors' => [
                     'uploaded' => 'Harus Ada File yang diupload',
                     'mime_in' => 'File Extention Harus Berupa jpg,jpeg,gif,png,svg',
-                    'max_size' => 'Ukuran File Maksimal 2 MB'
-                ]
-
-            ]
+                    'max_size' => 'Ukuran File Maksimal 2 MB',
+                ],
+            ],
         ])) {
             session()->setFlashdata('message', $this->validator->listErrors());
             session()->setFlashdata('message1', 'Error');
             return redirect()->back()->withInput();
+        }
+
+        $kategori  = $this->request->getVar('poin_promo');
+        $nilai_promo = $this->request->getVar('nilai_promo');
+        if($kategori == 'poin'){
+            $poin = $nilai_promo;
+            $persen = '';
+        }else{
+            $poin = '';
+            $persen = $nilai_promo;
         }
 
         $dataBerkas = $this->request->getFile('berkas');
@@ -143,18 +247,40 @@ class Admin extends BaseController
             'judul' => htmlspecialchars($this->request->getVar('judul')),
             'kode_promo' => htmlspecialchars($this->request->getVar('kode_promo')),
             'deskripsi' => $this->request->getVar('deskripsi'),
-            'poster' => $fileName,
+            'gambar' => 'wotle/wotle_assets/img/promo/'.$fileName,
             'tgl_mulai' => $this->request->getVar('tgl_mulai'),
             'tgl_akhir' => $this->request->getVar('tgl_akhir'),
+            'jumlah_poin' => $poin,
+            'jumlah_persen' => $persen,
             'status' => 'aktif',
+            'created_at' => Time::now(),            
+            'updated_at' => Time::now(),            
         ]);
-        $dataBerkas->move('img/promo/', $fileName);
+        $dataBerkas->move('wotle_assets/img/promo/', $fileName);
         session()->setFlashdata('message', 'Data Promo Berhasil di Upload');
         return redirect('admin-promo');
     }
+
+    public function detail_promo(){
+        $id = $this->request->getVar('id');
+        $promo = $this->PromoModel->find($id);
+        if($promo){
+            return json_encode([
+                'code' => '200',
+                'message' => 'data-found',
+                'promo' => $promo,
+            ]);
+        }else{
+            return json_encode([
+                'code' => '404',
+                'message' => 'data-not-found',
+            ]);
+        }
+    }
+
     public function update_promo($id)
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
         if (!$this->validate([
@@ -175,6 +301,18 @@ class Admin extends BaseController
                 'errors' => [
                     'required' => 'isi artikel Tidak boleh kosong'
                 ]
+            ],
+            'poin_promo' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pilih dahulu kategori',
+                ],
+            ],
+            'nilai_promo' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Masukan jumlah nilai',
+                ],
             ],
             'tgl_mulai' => [
                 'rules' => 'required',
@@ -206,39 +344,56 @@ class Admin extends BaseController
         if ($dataBerkas->getError() == 4) {
             $fileName = $this->request->getVar('file_lama');
         } else {
-            $fileName = $dataBerkas->getRandomName();
-            $dataBerkas->move('img/promo/', $fileName);
+            $randomName = $dataBerkas->getRandomName();
+            $dataBerkas->move('wotle_assets/img/promo/', $randomName);
+            $fileName = 'wotle_assets/img/promo/'.$randomName;
 
-            $posterLama = 'img/promo/' . $this->request->getVar('file_lama');
+            $posterLama = $this->request->getVar('file_lama');
             if (file_exists($posterLama)) {
                 unlink($posterLama);
             }
         }
+
+        $kategori  = $this->request->getVar('poin_promo');
+        $nilai_promo = $this->request->getVar('nilai_promo');
+        if($kategori == 'poin'){
+            $poin = $nilai_promo;
+            $persen = '';
+        }else{
+            $poin = '';
+            $persen = $nilai_promo;
+        }
+
+
         $data = [
             'judul' => htmlspecialchars($this->request->getVar('judul')),
             'kode_promo' => htmlspecialchars($this->request->getVar('kode_promo')),
             'deskripsi' => $this->request->getVar('deskripsi'),
-            'poster' => $fileName,
+            'gambar' =>  $fileName,
             'tgl_mulai' => $this->request->getVar('tgl_mulai'),
             'tgl_akhir' => $this->request->getVar('tgl_akhir'),
-            'status' => 'aktif',
+            'jumlah_poin' => $poin,
+            'jumlah_persen' => $persen,
+            'status' => 'aktif',                    
+            'updated_at' => Time::now(), 
         ];
         $update = $this->PromoModel->update($id, $data);
         if ($update) {
-            session()->setFlashdata('message', 'Data promo Berhasil di Upload');
+            session()->setFlashdata('message', 'Data promo Berhasil diubah');
         } else {
-            session()->setFlashdata('message', 'Data promo Gagal di Upload');
+            session()->setFlashdata('message', 'Data promo Gagal diubah');
         }
         return redirect('admin-promo');
     }
+
     public function hapus_promo()
     {
-        if (session()->get('role') != 'admin') {
+        if (session()->get('role_wotle') != 'admin') {
             return redirect('dashboard');
         }
         $id = $this->request->getVar('id');
         $promo = $this->PromoModel->find($id);
-        $poster = 'img/promo/' . $promo['poster'];
+        $poster = $promo['gambar'];
         if (file_exists($poster)) {
             unlink($poster);
         }
@@ -248,7 +403,7 @@ class Admin extends BaseController
         } else {
             session()->setFlashdata('message', 'Data gagal dihapus');
         }
-        return redirect()->to('/admin-promo');
+        return redirect()->to('admin-promo');
     }
 
 
@@ -392,4 +547,18 @@ class Admin extends BaseController
         ];
         return view('admin/ticket', $data);
     }
+
+
+    // Bagina Destinasi
+
+    public function group_destinasi()
+    {
+        $group = $this->ListdestinationModel->groupBy('tujuan_akhir')->findAll();
+        return json_encode([
+            'code' => '200',
+            'message' => 'success',
+            'destinasi' => $group,
+        ]);
+    }
+
 }

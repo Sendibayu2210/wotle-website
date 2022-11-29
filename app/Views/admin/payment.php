@@ -25,7 +25,7 @@
                         <div class="container bg-transparent p-3">
                             <div class="row flex-row-reverse">
                                 <div class="col-sm-12 col-md-12 col-lg-12 my-auto">
-                                    <h3><img src="/img/Visual-Studio-Logo.png" alt="" class="rounded float-end" style="max-width: 60px;"></h3>
+                                    <h3><img src="/wotle_assets/img/Visual-Studio-Logo.png" alt="" class="rounded float-end" style="max-width: 60px;"></h3>
                                     <h3 class="fw-bold h4 mb-4">Kuningan(kng) - Bandung(bdg)</h3>
                                     <p class="text-muted">Ingin berlibur ke kota Bandung dengan harga terjangkau? Pastikan Anda memilih paket Bandung Tour & Travel yang sedang memberikan diskon besar-besaran untuk berwisata di Lembang, Kota Bandung.</p>
                                     <h4 class="text-end mt-4 fw-bold text-lime">RP 150.000</h4>
@@ -98,27 +98,27 @@
                                                         <div class="row logo-bank">
                                                             <div class="col-4 mb-3">
                                                                 <button class="btn bank" data-norek="BCA-94249372498789">
-                                                                    <img src="/img/bank/bca.png" alt="BCA">
+                                                                    <img src="/wotle_assets/img/bank/bca.png" alt="BCA">
                                                                 </button>
                                                             </div>
                                                             <div class="col-4 mb-3">
                                                                 <button class="btn bank" data-norek="BNI-94249372498789">
-                                                                    <img src="/img/bank/bni.png" alt="BNI">
+                                                                    <img src="/wotle_assets/img/bank/bni.png" alt="BNI">
                                                                 </button>
                                                             </div>
                                                             <div class="col-4 mb-3">
                                                                 <button class="btn bank" data-norek="BRI-94249372498789">
-                                                                    <img src="/img/bank/bri.png" alt="BRI">
+                                                                    <img src="/wotle_assets/img/bank/bri.png" alt="BRI">
                                                                 </button>
                                                             </div>
                                                             <div class="col-4 mb-3">
                                                                 <button class="btn bank" data-norek="MANDIRI-94249372498789">
-                                                                    <img src="/img/bank/mandiri.png" alt="MANDIRI">
+                                                                    <img src="/wotle_assets/img/bank/mandiri.png" alt="MANDIRI">
                                                                 </button>
                                                             </div>
                                                             <div class="col-4 mb-3">
                                                                 <button class="btn bank" data-norek="PERMATA-94249372498789">
-                                                                    <img src="/img/bank/permata.png" alt="PERMATA">
+                                                                    <img src="/wotle_assets/img/bank/permata.png" alt="PERMATA">
                                                                 </button>
                                                             </div>
                                                             <div class="col-4 mb-3">

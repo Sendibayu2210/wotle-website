@@ -14,7 +14,7 @@ class Users extends Migration
                 'constraint' => 11,
                 'auto_increment' => true,
             ],
-            'username' => [
+            'email' => [
                 'type' => 'varchar',
                 'constraint' => 100,
             ],
@@ -33,22 +33,30 @@ class Users extends Migration
             'foto' => [
                 'type' => 'varchar',
                 'constraint' => 100,
-            ],
-            'referal' => [
-                'type' => 'varchar',
-                'constraint' => 15,
-            ],
-            'tautan_referal' => [
-                'type' => 'varchar',
-                'constraint' => 15,
-            ],
+            ],            
             'status' => [
                 'type' => 'enum',
                 'constraint' => ['aktif', 'nonaktif', 'ditangguhkan', 'register'],
-            ],
-            'point' => [
+            ],         
+            'no_hp' => [
                 'type' => 'varchar',
                 'constraint' => 15,
+            ],
+            'no_darurat' => [
+                'type' => 'varchar',
+                'constraint' => 15,
+            ],   
+            'ttl' => [
+                'type' => 'varchar',
+                'constraint' => 50,
+            ],   
+            'plat_nomor' => [
+                'type' => 'varchar',
+                'constraint' => 15,
+            ],
+            'tipe_kendaraan' => [
+                'type' => 'varchar',
+                'constraint' => 255,
             ],
             'ktp' => [
                 'type' => 'varchar',
@@ -58,13 +66,21 @@ class Users extends Migration
                 'type' => 'varchar',
                 'constraint' => 100,
             ],
-            'plat_nomor' => [
+            'stnk' => [
+                'type' => 'varchar',
+                'constraint' => 100,
+            ],
+            'skck' => [
+                'type' => 'varchar',
+                'constraint' => 100,
+            ],
+            'referal' => [
                 'type' => 'varchar',
                 'constraint' => 15,
             ],
-            'tipe_kendaraan' => [
+            'tautan_referal' => [
                 'type' => 'varchar',
-                'constraint' => 255,
+                'constraint' => 15,
             ],
             'created_at' => [
                 'type' => 'datetime',
