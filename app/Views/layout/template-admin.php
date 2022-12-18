@@ -12,6 +12,8 @@
 
     <script src="/wotle_assets/custom_vendor/jquery/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/wotle_assets/custom_vendor/bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/wotle_assets/css/flickity.min.css">
+    <script src="/wotle_assets/js/flickity.pkgd.min.js"></script>
     <link rel="stylesheet" href="/wotle_assets/css/style.css">
 </head>
 
@@ -55,7 +57,7 @@
                 imgPreview.src = e.target.result;
             }
         }
-
+        
         function imgError() {
             $("img").bind("error", function() {
                 $(this).attr("src", "/img/skeleton.gif");

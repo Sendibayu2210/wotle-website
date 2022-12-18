@@ -24,6 +24,10 @@
                 <div class="me-2"><i class="fa-brands fa-cc-discover"></i></div>
                 <div class="">Promo</div>
             </a>
+            <a href="/riwayat-perjalanan" class="d-flex py-2 ps-4 <?= ($link == 'riwayat') ? 'active' : ''; ?>">
+                <div class="me-2"><i class="fa-solid fa-car-side"></i></i></div>
+                <div class="">Riwayat</div>
+            </a>
             <!-- <a href="/tiket" class="d-flex py-2 ps-4 <?= ($link == 'tiket') ? 'active' : ''; ?>">
                 <div class="me-2"><i class="fa-solid tex fa-ticket fa-fw"></i></div>
                 <div class="">Tiket</div>
@@ -37,10 +41,10 @@
                 <div class="">Pembayaran</div>
             </a> -->
         <?php endif; ?>
-        <a href="" class="d-flex py-2 ps-4">
+        <!-- <a href="" class="d-flex py-2 ps-4">
             <div class="me-2"><i class="fa-solid tex fa-bell fa-fw"></i></div>
             <div class="circle-notif">Notifikasi</div>
-        </a>
+        </a> -->
         <a href="/logout" class="d-block py-2 ps-4 btn-logout">
             <span class="d-flex">
                 <div class="me-2"><i class="fa-solid tex fa-sign-out fa-fw"></i></div>

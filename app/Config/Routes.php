@@ -53,6 +53,9 @@ $routes->post('/register-valid', 'Auth::save_register');
 // Admin 
 $routes->get('/dashboard', 'Admin::index');
 $routes->get('/users', 'Admin::users');
+
+$routes->get('/riwayat-perjalanan','Admin::riwayat_perjalanan');
+
 // ajax get users
 $routes->post('/getUsers/(:any)', 'Admin::getUsers/$1');
 $routes->post('/user/(:any)', 'Admin::detail_user/$1');
@@ -85,6 +88,10 @@ $routes->get('/destination-group', 'Admin::group_destinasi');
 
 // Profile
 $routes->get("/profile",'General::profile');
+$routes->get("/berkas",'General::berkas');
+
+
+
 
 
 

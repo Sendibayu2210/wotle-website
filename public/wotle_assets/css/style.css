@@ -34,11 +34,40 @@
     background: rgb(43, 211, 43);
     color:white;
 }
+.text-primary{
+    color: #367bf5;
+}
+.bg-primary-light{
+    background: #e5efff;
+    color: #367bf5;
+}
+.btn-primary-light{
+    background: #e5efff;
+    color: #367bf5;
+    border: none;
+    border-radius: 10px;    
+}
+.btn-primary-light:hover{
+    border: 1px solid #e5efff;
+    color: #367bf5;
+}
+.text-brown{
+    color: #eeb58a;
+}
+
+
 .text-lime {
     color: rgb(22, 189, 22);
 }
 .bg-lime{
     background: rgb(43, 211, 43);
+}
+.text-red{
+    color: red;
+}
+.bg-red{
+    background-color: red;
+    color: white;
 }
 a{
     text-decoration: none;
@@ -103,18 +132,56 @@ a{
 .br-50{
     border-radius: 50%;
 }
+.w-30px{
+    width: 35px;
+}
+.w-50px{
+    width: 50px;
+}
+.w-60px{
+    width: 60px;
+}
+.w-80px{
+    width: 80px;
+}
+.w-100px{
+    width: 100px;
+}
 .w-200{
     width: 200px;
 }
-.w-xy-100{
+.w-220{
+    width: 220px;
+}
+.h50px, .h50px{
+    height:55px;
+}
+.input-login{
+    height: 55px;    
+    border-radius: 10px;
+    outline: 0;
+}
+.hw-50, .wh-50{
+    height: 50px;
+    width: 50px;
+}
+.hw-60{
+    height: 60px;
+    width: 60px;
+}
+.w-xy-100, .hw-100{
     width:100px;    
     height: 100px;
+}
+.w-xy-200, .hw-200{
+    width:200px;    
+    height: 200px;
 }
 .w-xy-40{    
     width: 40px;
     height: 40px;
 }
-.object-fit-cover{
+.object-fit-cover, .of-cover{
     object-fit: cover;
     height: 100%;;
     width: 100%;
@@ -133,6 +200,9 @@ a.nav-link.active{
     color: #316789;
     font-weight: bold;
 }
+.navbar{
+    z-index: 100;
+}
 
 
 
@@ -140,7 +210,10 @@ a.nav-link.active{
 .logo-wotle{
     width: 35px;
 }
-
+.choose-dest-date{
+    padding: 20px 0;
+    border-radius: 60px;
+}
 
 /* login & register*/
 .card-login{
@@ -157,13 +230,36 @@ a.nav-link.active{
 
 .btn-login,
 .btn-register{
-    border-radius: 20px;
+    border-radius: 10px;
     background: linear-gradient(to right,#316789, #adc8d8);
     border: 0;
+    height: 55px;
     color:#fff;
+    font-size: 20px;
 }
 .login form{
     margin-top: 50px;
+}
+.row-login{    
+    width: 90%;    
+    margin: 0 auto;
+    border-radius: 25px;
+    min-height: 90vh;
+    background: #f8f9fd;
+    position: relative;
+}
+.row-login .navbar-brand{
+    position: absolute;
+    z-index: 2;
+    right: 30px;
+    top: 15px;
+    width: 50px;
+}
+.img-login{
+    position: absolute;
+    top: -100px;
+    width: 90%;
+    margin: 0 auto;    
 }
 
 /* Register */
@@ -299,17 +395,23 @@ a.nav-link.active{
     text-align: center;
     padding: 10px;
     border-radius: 10px;
+    cursor: pointer;
+  }
+  .dates:hover{
+    background: #e5efff;
+    color: #367bf5;
+    transition: all .3s;
   }
   
   .dates span {
     display: block;
     text-transform: uppercase;
-    font-size: 75%;
+    font-size: 75%;        
   }
   
   .today {
     background: #e95f5d;
-    color: #FFF;
+    color: #FFF;    
   }
 
   /* end event */
@@ -446,6 +548,17 @@ a.nav-link.active{
     width: 36%;
     background: #f6f6f8;
 }
+.landing-page-img-top{
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: #edf6fdde;
+}
+.landing-page-img-top img{
+    position: absolute;
+    top: -100px;
+    right: 0px;    
+}
 
 .logo-mitra img {
     width: 150px;
@@ -481,6 +594,134 @@ a.nav-link.active{
     border-bottom: 1px solid #316789;
     font-weight: bold;
 }
+.indonesian-flag{
+    width: 30px;
+    height: 16px;
+    background: white;
+    border: 0;    
+    border-radius: 4px;
+}
+.indonesian-flag div:nth-child(1){
+    width: 30px;
+    height: 8px;
+    background: red;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+/* landingpage destination */
+.landing-list-destination .carousel-cell{
+    width: 250px;
+    height: 250px;
+    margin: 0 20px;    
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;    
+    position: relative;
+}
+.landing-list-destination .carousel-cell img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;    
+}
+.landing-list-destination .carousel-cell .city-name{
+    position: absolute;
+/*    right: 15px;*/
+    bottom: 15px;    
+    margin: 0 auto;
+    background: rgba(0,0,0,0.5);
+    padding: 5px 15px;
+    font-weight: bold;
+    color: white;
+}
+.landing-list-destination .flickity-page-dots{
+    bottom: -50px;
+}
+.landing-list-destination .flickity-prev-next-button{
+    display: none;
+}
+.btn-prev-destination, .btn-next-destination{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: #e95f5d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+/* end landingpage destination */
+
+.text-lfdkas{
+    left: -50px;
+    text-align: center;
+    padding: 10px ;
+    background: white;    
+    position: absolute;
+    width: 170px;
+    z-index: 5;
+    top: 270px;    
+}
+.line-fsdfk{
+    position: absolute;
+    top: 100px;
+    right: -80px;
+    width: 150px;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.line-fsdfk div:nth-child(1){
+    background: pink;
+    height: 4px;
+    width: 120px;
+}
+.line-fsdfk div:nth-child(2){
+    margin-top: 7px;
+    background: brown;
+    height: 4px;
+    width: 90px;
+}
+.line-dflks{
+    width: 200px;
+    height: 50px;
+    border: none;    
+    background: white;
+    position: absolute;
+    z-index: 5;
+    right: -50px;
+    top: 200px;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.line-dflks div:nth-child(1){
+    background: lightblue;
+    height: 4px;
+    width: 180px;
+}
+.line-dflks div:nth-child(2){
+    margin-top: 7px;
+    background: purple;
+    height: 4px;
+    width: 150px;
+}
+.line-dflks div:nth-child(3){
+    margin-top: 7px;
+    background: orange;
+    height: 4px;
+    width: 120px;
+}
+.linepanahsdkfl{
+    position: absolute;
+    width: 150px;
+    left: 0;
+    bottom: -30px;
+    transform: rotate(90deg) scaleY(-1);
+    z-index: 2
+}
 /* End Homepage */
 
 
@@ -501,8 +742,20 @@ a.nav-link.active{
     color: #316789;
     font-weight: bold;
 }
-
 /* end page users */
+
+/* page riwayat */
+.class-fdlk{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    border-radius: 50%; 
+    margin-top: -10px;   
+    background: white;
+}
+/* end page riwayat */
 
 @media only screen and (min-width: 1300px){
     /*.page-first{
@@ -513,7 +766,6 @@ a.nav-link.active{
 @media only screen and (max-width:992px){
   
     /* Homepage  */
-
     .page-first{
         height: 35vh;
     }
@@ -526,15 +778,38 @@ a.nav-link.active{
         top : 100px;
         z-index: -1;
     }
+    #home{
+        margin-top: 100px;
+    }
     .service-icon{
         margin: 0 auto;
     }
     .bg-first-page .card-img-large,
     .line-page-first::before,
     .background-login,
-    .background-register{
+    .background-register,
+
+    .bg-first-page > div .landing-page-img-top img,
+    .line-dflks,
+    .line-fsdfk,
+    .linepanahsdkfl,
+    .text-lfdkas{
         display: none;
     }    
+
+    .bg-first-page > div{
+        position: absolute;
+        z-index: -1;
+        top: -300px;        
+    }    
+    .landing-page-img-top{
+        z-index: -1;
+    }
+    .choose-dest-date{
+        position: absolute;        
+        z-index: 2;
+        background: white;
+    }
     /* End Homepage   */
     
 
@@ -542,7 +817,7 @@ a.nav-link.active{
         position: absolute;
         z-index: 100;
         background: white;
-        transition: all .3s;
+        transition: all .3s;        
     }
 
     .btn-hide-sidebar{
@@ -550,8 +825,12 @@ a.nav-link.active{
         left : 280px;
     }
 
+    #konten-admin{
+        overflow: none;
+    }
     #konten-admin .navbar{
         display: block;
+        z-index: 50;
     }
     #konten-admin, .dashboard{
         width: 100%;
@@ -566,6 +845,16 @@ a.nav-link.active{
     .bg-first-page::before {
         height: 80vh;
     }
+    #home{
+        margin-top: 150px;
+    }
+    .row-login{
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        border-radius: 0;        
+    }
+
   }
 
   @media only screen and (max-width: 520px) {
@@ -581,3 +870,84 @@ a.nav-link.active{
         margin-top: 20px;
     }
   }
+
+
+
+
+
+
+/* Driver */
+#dashboard-mobile{
+    position: relative;    
+}
+
+#dashboard-mobile > .container{
+    max-width: 520px;
+    background: #fbfbfa;    
+}
+
+.status-driver{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;    
+    background: white;
+    font-size: 17px;
+    width: 200px;
+    margin: 0 auto;   
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.status-driver.active{
+    background: #e5efff;
+    color: #367bf5;
+}
+#dashboard-mobile .list-menu{
+    background: white;
+    border-radius : 20px;
+    padding: 40px 20px;
+    width: 100%;
+}
+.judul-berkas{
+    position: absolute;
+    background: white;
+    border-radius: 0  5px 5px 0;
+    top: 0;
+    left: 0;
+    padding: 5px 15px;
+}
+#menu-bar{    
+    position: fixed;
+    left: 0;
+    bottom: 0px;        
+    width: 450px;    
+    margin: 0 auto;
+    padding: 20px 20px;
+    background: white;
+
+}
+
+.class-fdk{
+    width: 100%;
+    border-radius: 20px;
+    height: 40px;
+    color: white;
+    /* background: linear-gradient(to right, purple, lightblue);     */
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-weight: bold;
+}
+.class-fdk::after{
+    content: ' ';
+    width: 100%;
+    border-radius: 20px;
+    height: 40px;            
+    position: absolute;
+    z-index: 5;
+    
+}

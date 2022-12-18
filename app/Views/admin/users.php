@@ -120,30 +120,30 @@
                                 </div>                      
                             </div>   
                         </div>
-                    </div>     
+                    </div>                        
                     <div class="card border-0 shadow br-20 w-lg-75 mx-auto mt-4">
                         <div class="card-body">
                             <div class="mb-3 h4">Berkas Driver</div>
                             <div class="row text-center">
-                                <div class="col-lg-3 mb-3">
+                                <div class="col-lg-3 col-md-6 col-6 mb-3">
                                     <div class="mb-3">KTP</div>
                                     <div><img src="" data-bs-toggle="modal" data-bs-target="#viewGambar" alt="" class="img-ktp max-width-200 img-berkas-driver cursor-pointer br-15"></div>
                                 </div>
-                                <div class="col-lg-3 mb-3">
+                                <div class="col-lg-3 col-md-6 col-6 mb-3">
                                     <div class="mb-3">STNK</div>
                                     <div><img src="" data-bs-toggle="modal" data-bs-target="#viewGambar" alt="" class="img-stnk max-width-200 img-berkas-driver cursor-pointer br-15"></div>
                                 </div>
-                                <div class="col-lg-3 mb-3">
+                                <div class="col-lg-3 col-md-6 col-6 mb-3">
                                     <div class="mb-3">SIM</div>
                                     <div><img src="" data-bs-toggle="modal" data-bs-target="#viewGambar" alt="" class="img-sim max-width-200 img-berkas-driver cursor-pointer br-15"></div>
                                 </div>
-                                <div class="col-lg-3 mb-3">
+                                <div class="col-lg-3 col-md-6 col-6 mb-3">
                                     <div class="mb-3">SKCK</div>
                                     <div><img src="" data-bs-toggle="modal" data-bs-target="#viewGambar" alt="" class="img-skck max-width-200 img-berkas-driver cursor-pointer br-15"></div>
                                 </div>
                             </div>
                         </div>
-                    </div>           
+                    </div>                               
                 </div>
             </div>
             <div class="modal-footer">
@@ -317,10 +317,10 @@
                     $(".detail-alamat-user").html(result.user.alamat);                    
                     $(".detail-ttl-user").html(result.user.ttl); 
                     $(".detail-created-user").html(result.user.created_at); 
-                    $('.img-ktp').attr('src','/'+result.user.ktp);
-                    $('.img-stnk').attr('src','/'+result.user.stnk);
-                    $('.img-sim').attr('src','/'+result.user.sim);
-                    $('.img-skck').attr('src','/'+result.user.skck);
+                    $('.img-ktp').attr('src',result.user.ktp);
+                    $('.img-stnk').attr('src',result.user.stnk);
+                    $('.img-sim').attr('src',result.user.sim);
+                    $('.img-skck').attr('src',result.user.skck);
 
                     $(".detail-status-user").html(`<button class="btn btn-wotle btn-sm w-100">`+result.user.status+`</button>`);                    
                     $('.spinner-detail-user').addClass("hide");

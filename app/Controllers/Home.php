@@ -8,7 +8,7 @@ class Home extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Selamat Datang di Wotle',
+            'title' => 'Wotle - Wonderful Suttle',
         ];
         return view('homepage/homepage', $data);
     }

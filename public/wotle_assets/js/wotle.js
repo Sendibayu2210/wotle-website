@@ -28,11 +28,11 @@ $('a.nav-link').click(function(){
         let password = $('#password').val();
         let csrf = $('[name="csrf_test_name"]').val();
         if (username == '') {
-            $(this).html('login');
+            $(this).html('Masuk');
             $('#username').addClass('is-invalid').focus();
             $('.invalid-feedback.username').html('username harus diisi');            
         } else if (password == '') {
-            $(this).html('login');
+            $(this).html('Masuk');
             $('#password').addClass('is-invalid').focus();
             $('.invalid-feedback.password').html('password harus diisi');
         } else {
@@ -45,7 +45,7 @@ $('a.nav-link').click(function(){
                     password: password,                    
                 },
                 success: function(result) {                
-                    let btnLogin = () => { $('.btn-login').html('login').css('color','#fff');}
+                    let btnLogin = () => { $('.btn-login').html('Masuk').css('color','#fff');}
                     if (result.message == 'email tidak ditemukan') {
                         $('#username').addClass('is-invalid').val(result.email).focus();
                         $('.invalid-feedback.username').html(result.message);
@@ -66,7 +66,7 @@ $('a.nav-link').click(function(){
                         btnLogin();
                     }
                     if (result.message == 'login-success') {                        
-                        $('.btn-login').html('login berhasil');
+                        $('.btn-login').html('berhasil');
                         $('.message-login').removeClass("hide").html(`<div class="alert alert-success">Login Berhasil</div>`);
                         $.ajax({
                             url : '/valid-login',

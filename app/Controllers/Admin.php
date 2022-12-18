@@ -34,7 +34,7 @@ class Admin extends BaseController
         if(session()->get('role_wotle') == 'admin'){
             return view('admin/dashboard', $data);
         }else{
-            return view('driver/dashboard_driver', $data);            
+            return view('driver/dashboard_mobile', $data);            
         }
     }
 
@@ -247,7 +247,7 @@ class Admin extends BaseController
             'judul' => htmlspecialchars($this->request->getVar('judul')),
             'kode_promo' => htmlspecialchars($this->request->getVar('kode_promo')),
             'deskripsi' => $this->request->getVar('deskripsi'),
-            'gambar' => 'wotle/wotle_assets/img/promo/'.$fileName,
+            'gambar' => 'wotle_assets/img/promo/'.$fileName,
             'tgl_mulai' => $this->request->getVar('tgl_mulai'),
             'tgl_akhir' => $this->request->getVar('tgl_akhir'),
             'jumlah_poin' => $poin,
@@ -549,7 +549,7 @@ class Admin extends BaseController
     }
 
 
-    // Bagina Destinasi
+    // Bagian Destinasi Destinasi
 
     public function group_destinasi()
     {
@@ -559,6 +559,17 @@ class Admin extends BaseController
             'message' => 'success',
             'destinasi' => $group,
         ]);
+    }
+
+
+    // Riwayat Perjalanan
+    public function riwayat_perjalanan()
+    {
+        $data = [
+            'title' => 'Riwayat Perjalanan',
+            'link' => 'riwayat',
+        ];
+        return view('admin/riwayat_perjalanan',$data);
     }
 
 }

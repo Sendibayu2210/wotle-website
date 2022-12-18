@@ -11,7 +11,7 @@
         </div>
         <div class="row">            
             <?php foreach ($promo as $x) : ?>
-                <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="col-lg-4 col-md-6 col-12 mb-4 d-flex">
                     <div class="card card-promo br-15 border-0 cursor-pointer" data-bs-toggle="modal" data-bs-target="#detail_promo" data-id="<?= $x['id']; ?>">
                         <img src="<?= $x['gambar']; ?>" class="card-img-top">
                         <div class="card-body">

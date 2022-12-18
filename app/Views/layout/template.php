@@ -8,6 +8,8 @@
     <link rel="shortcut icon" type="image/x-icon" href="/wotle_assets/img/logo/logo_wotle.png" />
     <script src="/wotle_assets/custom_vendor/jquery/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" href="/wotle_assets/custom_vendor/bootstrap5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/wotle_assets/css/flickity.min.css">
+    <script src="/wotle_assets/js/flickity.pkgd.min.js"></script>
     <link rel="stylesheet" href="wotle_assets/css/style.css">
 </head>
 

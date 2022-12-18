@@ -24,6 +24,14 @@ class General extends BaseController
         ];
         return view('general/profile',$data);
     }
+     public function berkas(){        
+        $data = [
+            'title' => 'Profile Pengguna',
+            'link' => 'profile',
+            'email' => session()->get('email_wotle'),
+        ];
+        return view('general/berkas',$data);
+    }
 
 }
 ?>
